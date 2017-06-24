@@ -1,9 +1,13 @@
 <component name="libraryTable">
   <library name="mockito-core-2.8.9-javadoc">
-    <CLASSES />
+    <CLASSES>
+      <root url="jar:///usr/local/mockito/mockito-core-2.8.9.jar!/" />
+    </CLASSES>
     <JAVADOC>
       <root url="jar:///usr/local/mockito/mockito-core-2.8.9-javadoc.jar!/" />
     </JAVADOC>
-    <SOURCES />
+    <SOURCES>
+      <root url="jar:///usr/local/mockito/mockito-core-2.8.9-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
