@@ -44,16 +44,18 @@ public class LinkedList<T> {
             return;
         }
 
+        Node prev = null;
         Node currNode = head;
         Node newNode = new Node(data);
 
-        while (index - 1 > 0) {
+        while (index > 0) {
+            prev = currNode;
             currNode = currNode.getNext();
             index--;
         }
 
-        newNode.setNext(currNode.getNext());
-        currNode.setNext(newNode);
+        newNode.setNext(currNode);
+        prev.setNext(newNode);
         size++;
     }
 
@@ -94,7 +96,6 @@ public class LinkedList<T> {
 
         if(curr == head) {
             head = curr.getNext();
-            curr.setNext(null);
             size--;
         } else {
             prev.setNext(curr.getNext());

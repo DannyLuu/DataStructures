@@ -19,11 +19,11 @@ public class Main {
         linkedList.add("0", 0);
         System.out.println(linkedList.getSize() + " - Insert 0 at beginning: " + linkedList.toString());
 
-        linkedList.add("yolo", linkedList.getSize());
+        linkedList.add("yolo", linkedList.getSize() - 1);
         System.out.println(linkedList.getSize() + " - Insert yolo at the end: " + linkedList.toString());
 
-        linkedList.add("swag", 4);
-        System.out.println(linkedList.getSize() + " - Insert swag at the 4th position: " + linkedList.toString());
+        linkedList.add("swag", 2);
+        System.out.println(linkedList.getSize() + " - Insert swag at the 2nd position: " + linkedList.toString());
 
         System.out.println("Get node at position 0: " + linkedList.get(0));
         System.out.println("Get node at position 100: " + linkedList.get(100));
