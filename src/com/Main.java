@@ -16,8 +16,8 @@ public class Main {
 
 				System.out.println(linkedList.getSize() + " - LinkedList: " + linkedList.toString());
 
-				linkedList.add("1", 1);
-				System.out.println(linkedList.getSize() + " - Insert 1 at beginning: " + linkedList.toString());
+				linkedList.add("0", 0);
+				System.out.println(linkedList.getSize() + " - Insert 0 at beginning: " + linkedList.toString());
 
 				linkedList.add("yolo", linkedList.getSize());
 				System.out.println(linkedList.getSize() + " - Insert yolo at the end: " + linkedList.toString());

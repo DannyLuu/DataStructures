@@ -33,29 +33,23 @@ public class LinkedList<T> {
 		}
 
 		public void add(T data, int index) {
-				int pos = index - 1;
-
-				if (pos == 0) {
+				// Add at the beginning.
+				if (index == 0) {
 						add(data);
 						return;
 				}
 
-				Node<T> node = new Node(data);
-				Node ptr = head;
+				Node currNode = head;
+				Node newNode = new Node(data);
 
-				if (pos < size) {
-					for (int i = 1; i < size; i++) {
-
-							if (i == pos) {
-									node.setNext(ptr.getNext());
-									ptr.setNext(node);
-									break;
-							}
-							ptr = ptr.getNext();
-					}
-						size++;
+				while(index - 1 > 0) {
+						currNode = currNode.getNext();
+						index--;
 				}
 
+				newNode.setNext(currNode.getNext());
+				currNode.setNext(newNode);
+				size++;
 		}
 
 		/**
@@ -68,16 +62,18 @@ public class LinkedList<T> {
 						return null;
 				}
 
+				Node currNode = head;
+				while()
+
 				return null;
 		}
 
 		/**
 		 * Remove node at index.
 		 * @param index
-		 * @return
 		 */
-		public boolean remove(int index) {
-				return false;
+		public void remove(int index) {
+
 		}
 
 		@Override
