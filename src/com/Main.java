@@ -1,40 +1,43 @@
 package com;
 
-import com.lists.LinkedList;
+import com.trees.BinarySearchTree;
+import com.trees.BinarySearchTree.Node;
 
 public class Main {
 
     public static void main(String[] args) {
-        LinkedList<String> linkedList = new LinkedList();
+        BinarySearchTree bst = new BinarySearchTree();
 
-        System.out.println("Is new linked list empty? " + linkedList.isEmpty());
+        bst.insert(10);
+        bst.insert(5);
+        bst.insert(15);
+        bst.insert(7);
+        bst.insert(6);
+        bst.insert(11);
+        bst.insert(13);
+        Node root = bst.getRoot();
+        System.out.println(" 0 - left, root, right = " + root.left + "," + root + "," + root.right);
 
-        linkedList.add("d");
-        linkedList.add("c");
-        linkedList.add("b");
-        linkedList.add("a");
+        Node left = root.left;
+        System.out.println(" 1 - left, root, right = " + left.left + "," + left + "," + left.right);
 
-        System.out.println(linkedList.getSize() + " - LinkedList: " + linkedList.toString());
+        Node right = root.right;
+        System.out.println(" 1 - left, root, right = " + right.left + "," + right + "," + right.right);
 
-        linkedList.add("0", 0);
-        System.out.println(linkedList.getSize() + " - Insert 0 at beginning: " + linkedList.toString());
 
-        linkedList.add("yolo", linkedList.getSize() - 1);
-        System.out.println(linkedList.getSize() + " - Insert yolo at the end: " + linkedList.toString());
+        Node leftRight = left.right;
+        System.out.println(" 2 - left, root, right = " + leftRight.left + "," + leftRight + "," + leftRight.right);
 
-        linkedList.add("swag", 2);
-        System.out.println(linkedList.getSize() + " - Insert swag at the 2nd position: " + linkedList.toString());
+        Node rightLeft = right.left;
+        System.out.println(" 2 - left, root, right = " + rightLeft.left + "," + rightLeft + "," + rightLeft.right);
 
-        System.out.println("Get node at position 0: " + linkedList.get(0));
-        System.out.println("Get node at position 100: " + linkedList.get(100));
+        System.out.println("parent of 11 should be 15 = " + rightLeft.parent);
+        System.out.println("parent of 5 should be 10 = " + left.parent);
+        System.out.println("parent of 15 should be 10 = " + right.parent);
+        System.out.println("parent of root should be null = " + root.parent);
 
-        linkedList.remove(0);
-        System.out.println(linkedList.getSize() + " - Remove first element: " + linkedList.toString());
 
-        linkedList.remove(3);
-        System.out.println(linkedList.getSize() + " - Remove swag from the list: " + linkedList.toString());
+        System.out.println("Find 13 = " + bst.search(13));
 
-        linkedList.remove(linkedList.getSize() - 1);
-        System.out.println(linkedList.getSize() + " - Remove the last element from the list: " + linkedList.toString());
     }
 }
