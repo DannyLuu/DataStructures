@@ -12,7 +12,7 @@ public class BinarySearchTree {
     }
 
     /**
-     * Insert values into the BST.
+     * Insert nodes with a unique value  into the BST.
      *
      * @param value
      */
@@ -24,8 +24,71 @@ public class BinarySearchTree {
         }
     }
 
-    public void remove(Node node) {
 
+    /**
+     * Remove the node with the value.
+     * @param node
+     */
+    public void remove(int value) {
+        Node nodeToRemove = search(value);
+
+        if (nodeToRemove != null) {
+            // Remove leaf node.
+            if (nodeToRemove.isLeafNode()) {
+                Node parent = nodeToRemove.parent;
+                if (parent.left == nodeToRemove) {
+                    parent.left = null;
+                } else {
+                    parent.right = null;
+                }
+                nodeToRemove = null;
+
+            // Remove node with one child - LEFT
+            } else if (nodeToRemove.right == null) {
+                Node successorNode = nodeToRemove.left;
+                Node parent = nodeToRemove.parent;
+
+                if (parent.left == nodeToRemove) {
+                    parent.left = successorNode;
+                } else {
+                    parent.right = successorNode;
+                }
+
+                successorNode.parent = parent;
+                nodeToRemove.parent = null;
+            // Remove node with one child - right
+            } else if (nodeToRemove.left == null) {
+                Node successorNode = nodeToRemove.right;
+                Node parent = nodeToRemove.parent;
+
+                if (parent.left == nodeToRemove) {
+                    parent.left = successorNode;
+                } else {
+                    parent.right = successorNode;
+                }
+
+                successorNode.parent = parent;
+                nodeToRemove.parent = null;
+            // Remove node with two children.
+            } else {
+                System.out.println("Removing node with two children.");
+                Node successorNode = nodeToRemove.right;
+                boolean smallestNodeFound = false;
+                while (!smallestNodeFound) {
+                    if (successorNode.left != null) {
+                        successorNode = successorNode.left;
+                    } else {
+                        smallestNodeFound = true;
+                    }
+                }
+
+                successorNode.parent.left = null;
+                successorNode.parent = nodeToRemove.parent;
+                successorNode.right = nodeToRemove.right;
+                successorNode.left = nodeToRemove.left;
+                nodeToRemove = null;
+            }
+        }
     }
 
     /**

@@ -16,7 +16,7 @@ public class LinkedListTest {
     private LinkedList linkedList;
 
     @Before
-    public void setUp() {
+    public void setup() {
         linkedList = new LinkedList<String>();
     }
 
