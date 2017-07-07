@@ -1,6 +1,5 @@
-package test.lists.trees;
+package com.trees;
 
-import com.trees.BinarySearchTree;
 import org.junit.Before;
 import org.junit.Test;
 

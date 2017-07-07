@@ -1,6 +1,4 @@
-package test.lists;
-
-import com.lists.LinkedList;
+package com.lists;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
