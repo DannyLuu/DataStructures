@@ -1,4 +1,4 @@
-package com.lists;
+package com.datastructures.lists;
 
 /**
  * Singly Linked List class.

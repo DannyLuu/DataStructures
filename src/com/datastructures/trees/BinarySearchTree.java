@@ -1,4 +1,4 @@
-package com.trees;
+package com.datastructures.trees;
 
 /**
  * Created by Hisoka on 2017-06-25.

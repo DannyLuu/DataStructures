@@ -1,4 +1,4 @@
-package com.lists;
+package com.datastructures.lists;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

@@ -1,4 +1,4 @@
-package com.trees;
+package com.datastructures.trees;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.lists;
+package com.datastructures.lists;
 
 public class Node<T> {
     private T data;
