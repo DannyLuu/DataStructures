@@ -27,7 +27,8 @@ public class BinarySearchTree {
 
     /**
      * Remove the node with the value.
-     * @param node
+     *
+     * @param
      */
     public void remove(int value) {
         Node nodeToRemove = search(value);
@@ -36,14 +37,14 @@ public class BinarySearchTree {
             // Remove leaf node.
             if (nodeToRemove.isLeafNode()) {
                 Node parent = nodeToRemove.parent;
-                if (parent.left == nodeToRemove) {
+                if (parent.determineRelationTo(nodeToRemove) == RELATION.LEFT_CHILD) {
                     parent.left = null;
                 } else {
                     parent.right = null;
                 }
-                nodeToRemove = null;
+                nodeToRemove.parent = null;
 
-            // Remove node with one child - LEFT
+                // Remove node with one child - LEFT
             } else if (nodeToRemove.right == null) {
                 Node successorNode = nodeToRemove.left;
                 Node parent = nodeToRemove.parent;
@@ -56,11 +57,12 @@ public class BinarySearchTree {
 
                 successorNode.parent = parent;
                 nodeToRemove.parent = null;
-            // Remove node with one child - right
+                // Remove node with one child - right
             } else if (nodeToRemove.left == null) {
                 Node successorNode = nodeToRemove.right;
                 Node parent = nodeToRemove.parent;
 
+                // TODO: Add a switch statement here.
                 if (parent.left == nodeToRemove) {
                     parent.left = successorNode;
                 } else {
@@ -69,30 +71,59 @@ public class BinarySearchTree {
 
                 successorNode.parent = parent;
                 nodeToRemove.parent = null;
-            // Remove node with two children.
+                // Remove node with two children.
             } else {
-                System.out.println("Removing node with two children.");
+                // Find the successor node.
                 Node successorNode = nodeToRemove.right;
-                boolean smallestNodeFound = false;
-                while (!smallestNodeFound) {
-                    if (successorNode.left != null) {
-                        successorNode = successorNode.left;
+                while (successorNode.left != null) {
+                    successorNode = successorNode.left;
+                }
+
+                if (successorNode.right != null) {
+                    successorNode.right.parent = successorNode.parent;
+                    if (successorNode.parent.determineRelationTo(successorNode) == RELATION.LEFT_CHILD) {
+                        successorNode.parent.left = successorNode.right;
                     } else {
-                        smallestNodeFound = true;
+                        successorNode.parent.right = successorNode.right;
+                    }
+                } else if (successorNode.left != null) {
+                    successorNode.left.parent = successorNode.parent;
+                    if (successorNode.parent.determineRelationTo(successorNode) == RELATION.LEFT_CHILD) {
+                        successorNode.parent.left = successorNode.left;
+                    } else {
+                        successorNode.parent.right = successorNode.left;
+                    }
+                } else {
+                    if (successorNode.parent.determineRelationTo(successorNode) == RELATION.LEFT_CHILD) {
+                        successorNode.parent.left = null;
+                    } else {
+                        successorNode.parent.right = null;
                     }
                 }
 
-                successorNode.parent.left = null;
+                if (nodeToRemove == root) {
+                    root = successorNode;
+                } else {
+                    if (nodeToRemove.parent.determineRelationTo(nodeToRemove) == RELATION.LEFT_CHILD) {
+                        nodeToRemove.parent.left = successorNode;
+                    } else {
+                        nodeToRemove.parent.right = successorNode;
+                    }
+                }
+
                 successorNode.parent = nodeToRemove.parent;
-                successorNode.right = nodeToRemove.right;
                 successorNode.left = nodeToRemove.left;
-                nodeToRemove = null;
+                successorNode.left.parent = successorNode;
+                successorNode.right = nodeToRemove.right;
+                successorNode.right.parent = successorNode;
+
             }
         }
     }
 
     /**
      * Search should use in order traversal to find the value. Return null otherwise.
+     *
      * @param value
      * @return
      */
@@ -130,6 +161,7 @@ public class BinarySearchTree {
     }
 
     public class Node {
+
         public int data;
         public Node parent;
         public Node left;
@@ -152,6 +184,25 @@ public class BinarySearchTree {
                 return "" + data;
             }
         }
+
+        public RELATION determineRelationTo(Node potentialFamily) {
+            if (this.parent == potentialFamily) {
+                return RELATION.PARENT;
+            } else if (this.left == potentialFamily) {
+                return RELATION.LEFT_CHILD;
+            } else if (this.right == potentialFamily) {
+                return RELATION.RIGHT_CHILD;
+            } else {
+                return RELATION.UNKNOWN;
+            }
+        }
+    }
+
+    public static enum RELATION {
+        PARENT,
+        LEFT_CHILD,
+        RIGHT_CHILD,
+        UNKNOWN; // I don't know what else to call it :S
     }
 
 }

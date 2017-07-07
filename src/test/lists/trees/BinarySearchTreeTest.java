@@ -82,7 +82,34 @@ public class BinarySearchTreeTest {
 
     @Test
     public void testRemoveNodeWithTwoChildren() {
+        populateBST();
+        bst.remove(15);
 
+        // Check the root.
+        assertEquals(5, bst.getRoot().left.data);
+        assertEquals(16, bst.getRoot().right.data);
+
+        assertEquals(bst.getRoot(), bst.search(16).parent);
+        assertEquals(11, bst.search(16).left.data);
+        assertEquals(27, bst.search(16).right.data);
+    }
+
+    @Test
+    public void testRemoveRootNode() {
+        populateBST();
+        bst.remove(10);
+
+        //Check the root.
+        assertNull(bst.getRoot().parent);
+        assertEquals(11, bst.getRoot().data);
+        assertEquals(5, bst.getRoot().left.data);
+        assertEquals(15, bst.getRoot().right.data);
+        assertEquals(11, bst.search(15).parent.data);
+        assertEquals(13, bst.search(15).left.data);
+        assertEquals(27, bst.search(15).right.data);
+        assertEquals(14, bst.search(13).right.data);
+        assertNull(bst.search(13).left);
+        assertEquals(15, bst.search(13).parent.data);
     }
 
     /**
