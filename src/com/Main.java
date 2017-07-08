@@ -13,12 +13,12 @@ public class Main {
     public static void main(String[] args) {
         ArraysAndStringsAlgorithms arraysAndStringsAlgorithms = new ArraysAndStringsAlgorithms();
 
-        String word = "abcabc";
-        Set<String> permuations = arraysAndStringsAlgorithms.generatePermutations(word);
+        String first = "123456";
+        String second = "654123";
 
-        for (String s : permuations)
-            System.out.println(s);
+        System.out.println("checkPermutation = " + arraysAndStringsAlgorithms.checkPermutation(first,second));
 
-        System.out.println("permutation size = " + permuations.size());
+        String url = "Mr John Smith ";
+        System.out.println(arraysAndStringsAlgorithms.URLify(url));
     }
 }

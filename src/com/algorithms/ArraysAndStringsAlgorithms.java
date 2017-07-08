@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by Hisoka on 2017-07-07.
+ * Interview Questions
+ * Chapter 1 - Arrays and Strings
  */
 public class ArraysAndStringsAlgorithms {
 
     /**
+     * <b>1.1</b><br/>
      * Is Unique: Implement an algorithm to determine if a string has all unique characters.
      * <p>
      * What if you cannot use additional data structures?
@@ -39,16 +41,29 @@ public class ArraysAndStringsAlgorithms {
         return true;
     }
 
-
     /**
+     * <b>1.2</b><br/>
      * Given two strings, write a method to decide if one is a permutation of the other.
      *
-     * @param permutation - potential permutation in word.
-     * @param word        - String being checked.
+     * @param first  - potential permutation in word.
+     * @param second - String being checked.
      * @return
      */
-    public boolean checkPermutation(String permutation, String word) {
-        return false;
+    public boolean checkPermutation(String first, String second) {
+        if (first.length() != second.length()) {
+            return false;
+        }
+
+        char[] firstChars = first.toCharArray();
+        for (char c : firstChars) {
+            if (!second.contains(c + "")) {
+                return false;
+            }
+        }
+
+        Set<String> permutations = generatePermutations(first);
+
+        return permutations.contains(second);
     }
 
     /**
@@ -84,4 +99,43 @@ public class ArraysAndStringsAlgorithms {
             return input.substring(1, input.length()) + input.charAt(0);
         }
     }
+
+
+    /**
+     * <b>1.3</b><br/>
+     * URLify: Write a method to replace all spaces in a string with '%20:
+     * You may assume that the string has sufficient space at the end to hold the additional characters,
+     * and that you are given the "true" length of the string. (Note: If implementing in Java, please
+     * use a character array so that you can perform this operation in place.)
+     * <p>
+     * EXAMPLE
+     * Input: "Mr John Smith    " 13
+     * <br/>
+     * Output: "Mr%20John%20Smith"
+     *
+     * @param input
+     * @return
+     */
+    public String URLify(String input) {
+        char[] url = new char[input.length() * 2];
+        int additionalNumOfSpace = 0;
+        int offset = 0;
+
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+
+            if (c == ' ') {
+                url[offset++] = '%';
+                url[offset++] = '2';
+                url[offset++] = '0';
+                additionalNumOfSpace++;
+            } else {
+                url[offset++] = c;
+                additionalNumOfSpace = 0;
+            }
+        }
+        return String.copyValueOf(url, 0, offset - (additionalNumOfSpace * 3));
+    }
+
+
 }
