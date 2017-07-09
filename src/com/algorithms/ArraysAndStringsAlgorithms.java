@@ -1,8 +1,6 @@
 package com.algorithms;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -155,35 +153,53 @@ public class ArraysAndStringsAlgorithms {
      * @param input
      * @return
      */
-    // TODO: Complete.
-    public List<String> getPalindromePermutations(String input) {
-
-        List<String> palindromePermutation = new ArrayList<>();
+    public Set<String> getPalindromePermutations(String input) {
+        Set<String> palindromePermutation = new HashSet<>();
 
         if (isPalindromePermutation(input)) {
             char[] text = input.toLowerCase().toCharArray();
             int[] alphabet = new int[256];
-            int oddCharPos = -1;
+            int oddChar = -1;
             int wildCard = -1;
 
             for (int i = 0; i < input.length(); i++) {
                 if (text[i] == ' ') {
                     wildCard = i;
+                } else {
+                    alphabet[text[i]]++;
                 }
-                alphabet[text[i]]++;
             }
 
             String halfPalindrome = "";
-            if (input.length() % 2 != 0) {
-                for (int i = 0; i < alphabet.length; i++) {
-                    if (alphabet[i] == 1 && alphabet[i] != ' ') {
-                        oddCharPos = i;
-                    } else {
-                        for (int j = 0; j < alphabet[i] / 2; j++)
-                            halfPalindrome.concat(alphabet[i] + "");
-                    }
+            for (int i = 0; i < alphabet.length; i++) {
+                if (alphabet[i] == 1 && alphabet[i] != ' ') {
+                    oddChar = i;
+                } else {
+                    for (int j = 0; j < alphabet[i] / 2; j++)
+                        halfPalindrome = halfPalindrome.concat((char) i + "");
                 }
             }
+
+            Set<String> mirroredPermuations = generatePermutations(halfPalindrome);
+            for (String permuation : mirroredPermuations) {
+                if (oddChar > 0 ) {
+                    palindromePermutation.add(permuation + (char) oddChar + mirror(permuation));
+                } else {
+                    palindromePermutation.add(permuation + mirror(permuation));
+                }
+            }
+
+            if (wildCard > 0) {
+                Set<String> mirroredPermutationsWithWildcard = new HashSet<>();
+                for (String permutation : palindromePermutation) {
+                    for (int i = 1; i < permutation.length() - 1; i++) {
+                        mirroredPermutationsWithWildcard.add(permutation.substring(0,i) + " " + permutation.substring(i, permutation.length()));
+                    }
+                }
+
+                palindromePermutation = mirroredPermutationsWithWildcard;
+            }
+
         }
 
         return palindromePermutation;
@@ -233,7 +249,7 @@ public class ArraysAndStringsAlgorithms {
     public String mirror(String input) {
         String mirrored = "";
 
-        for (int i = input.length() - 1; i > 0; i++) {
+        for (int i = input.length() - 1; i >= 0; i--) {
             mirrored = mirrored + input.charAt(i);
         }
 
