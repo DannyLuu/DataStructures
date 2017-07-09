@@ -109,9 +109,11 @@ public class ArraysAndStringsAlgorithms {
      * use a character array so that you can perform this operation in place.)
      * <p>
      * EXAMPLE
+     * <br/>
      * Input: "Mr John Smith    " 13
      * <br/>
      * Output: "Mr%20John%20Smith"
+     * </p>
      *
      * @param input
      * @return
@@ -137,5 +139,105 @@ public class ArraysAndStringsAlgorithms {
         return String.copyValueOf(url, 0, offset - (additionalNumOfSpace * 3));
     }
 
+    /**
+     * <b>1.4</b><br/>
+     * <b></b>Palindrome Permutation:</b> Given a string, write a function to check if it is a permutation of a palin- drome.
+     * A palindrome is a word or phrase that is the same forwards and backwards. A permutation is a rearrangement
+     * of letters.The palindrome does not need to be limited to just dictionary words.
+     * <p>
+     * EXAMPLE
+     * <br/>
+     * Input: Tact Coa
+     * <br/>
+     * Output: True (permutations: "taco cat". "atco cta". etc.)
+     * </p>
+     *
+     * @param input
+     * @return
+     */
+    // TODO: Complete.
+    public List<String> getPalindromePermutations(String input) {
+
+        List<String> palindromePermutation = new ArrayList<>();
+
+        if (isPalindromePermutation(input)) {
+            char[] text = input.toLowerCase().toCharArray();
+            int[] alphabet = new int[256];
+            int oddCharPos = -1;
+            int wildCard = -1;
+
+            for (int i = 0; i < input.length(); i++) {
+                if (text[i] == ' ') {
+                    wildCard = i;
+                }
+                alphabet[text[i]]++;
+            }
+
+            String halfPalindrome = "";
+            if (input.length() % 2 != 0) {
+                for (int i = 0; i < alphabet.length; i++) {
+                    if (alphabet[i] == 1 && alphabet[i] != ' ') {
+                        oddCharPos = i;
+                    } else {
+                        for (int j = 0; j < alphabet[i] / 2; j++)
+                            halfPalindrome.concat(alphabet[i] + "");
+                    }
+                }
+            }
+        }
+
+        return palindromePermutation;
+    }
+
+    /**
+     * Check if a string is a palindrome permutation.
+     *
+     * @param input
+     * @return
+     */
+    public boolean isPalindromePermutation(String input) {
+        char[] text = input.toLowerCase().toCharArray();
+        int[] alphabet = new int[256];
+        int oddCount = 0;
+
+        for (int i = 0; i < input.length(); i++) {
+            if (text[i] != ' ') {
+                alphabet[text[i]]++;
+            }
+        }
+
+        for (int i = 0; i < alphabet.length; i++) {
+            if (alphabet[i] != 0) {
+                if (alphabet[i] % 2 != 0) {
+                    oddCount++;
+                }
+            }
+        }
+
+        if (oddCount > 1) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Mirrors the given input.
+     * <p>
+     * Ex. asdf -> fdsa
+     * </p>
+     *
+     * @param input
+     * @return
+     */
+    public String mirror(String input) {
+        String mirrored = "";
+
+        for (int i = input.length() - 1; i > 0; i++) {
+            mirrored = mirrored + input.charAt(i);
+        }
+
+        return mirrored;
+    }
 
 }
