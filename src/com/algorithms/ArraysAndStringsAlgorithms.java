@@ -257,6 +257,7 @@ public class ArraysAndStringsAlgorithms {
     }
 
     /**
+     * b>1.5</b><br/>
      * One Away: There are three types of edits that can be performed on strings:
      * insert a character, remove a character, or replace a character. Given two
      * strings, write a function to check if they are one edit (or zero edits) away.
@@ -324,6 +325,43 @@ public class ArraysAndStringsAlgorithms {
         }
 
         return true;
+    }
+
+    /**
+     * b>1.6</b><br/>
+     * String Compression:
+     * <br/>
+     * Implement a method to perform basic string compression using the counts of repeated characters.
+     * For example, the string aabcccccaaa would become a2b1c5a3. If the "compressed" string would not
+     * become smaller than the original string, your method should return the original string. You can
+     * assume the string has only uppercase and lowercase letters (a - z).
+     *
+     * @param input
+     * @return
+     */
+    public String compressString(String input) {
+        String compressed = "";
+
+
+        if (input.length() > 0) {
+            char c = input.charAt(0);
+            int count = 1;
+            for (int i = 1; i < input.length(); i++) {
+                if (input.charAt(i) != c) {
+                    compressed = compressed.concat(c + "" + count);
+                    c = input.charAt(i);
+                    count = 0;
+                }
+                count++;
+            }
+            compressed = compressed.concat(c + "" + count);
+        }
+
+        if (input.length() <= compressed.length()) {
+            return input;
+        }
+
+        return compressed;
     }
 
 }
