@@ -182,7 +182,7 @@ public class ArraysAndStringsAlgorithms {
 
             Set<String> mirroredPermuations = generatePermutations(halfPalindrome);
             for (String permuation : mirroredPermuations) {
-                if (oddChar > 0 ) {
+                if (oddChar > 0) {
                     palindromePermutation.add(permuation + (char) oddChar + mirror(permuation));
                 } else {
                     palindromePermutation.add(permuation + mirror(permuation));
@@ -193,7 +193,7 @@ public class ArraysAndStringsAlgorithms {
                 Set<String> mirroredPermutationsWithWildcard = new HashSet<>();
                 for (String permutation : palindromePermutation) {
                     for (int i = 1; i < permutation.length() - 1; i++) {
-                        mirroredPermutationsWithWildcard.add(permutation.substring(0,i) + " " + permutation.substring(i, permutation.length()));
+                        mirroredPermutationsWithWildcard.add(permutation.substring(0, i) + " " + permutation.substring(i, permutation.length()));
                     }
                 }
 
@@ -254,6 +254,76 @@ public class ArraysAndStringsAlgorithms {
         }
 
         return mirrored;
+    }
+
+    /**
+     * One Away: There are three types of edits that can be performed on strings:
+     * insert a character, remove a character, or replace a character. Given two
+     * strings, write a function to check if they are one edit (or zero edits) away.
+     * <p>
+     * EXAMPLE
+     * <br/>
+     * pale, ple -> true
+     * <br/>
+     * pales, pale -> true
+     * <br/>
+     * pale, bale -> true
+     * <br/>
+     * pale, bake -> false
+     * <br/>
+     * small, mall -> true
+     * </p>
+     *
+     * @param first
+     * @param second
+     * @return
+     */
+    public boolean oneAway(String first, String second) {
+        char[] firstChars = first.toLowerCase().toCharArray();
+        char[] secondChars = second.toLowerCase().toCharArray();
+
+        if (first.equals(second)) {
+            return true;
+        } else if ((first.length() > second.length() && first.length() - second.length() > 1) || (first.length() < second.length() && second.length() - first.length() > 1)) {
+            return false;
+        }
+
+        int oddChars = 0;
+        if (first.length() == second.length()) {
+            for (int i = 0; i < first.length() - 1; i++) {
+                if (first.charAt(i) != second.charAt(i)) {
+                    oddChars++;
+                }
+
+                if (oddChars > 1) {
+                    return false;
+                }
+            }
+        }
+
+        int currPos = 0;
+        if (second.length() + 1 == first.length()) {
+            firstChars = secondChars;
+            secondChars = first.toLowerCase().toCharArray();
+        }
+
+        if (first.length() + 1 == second.length()) {
+            for (int i = 0; i < second.length(); i++) {
+                if (secondChars[i] != firstChars[currPos]) {
+                    oddChars++;
+                }
+
+                if (oddChars > 1) {
+                    return false;
+                }
+
+                if (currPos < firstChars.length - 1) {
+                    currPos++;
+                }
+            }
+        }
+
+        return true;
     }
 
 }
