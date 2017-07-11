@@ -328,7 +328,7 @@ public class ArraysAndStringsAlgorithms {
     }
 
     /**
-     * b>1.6</b><br/>
+     * <b>1.6</b><br/>
      * String Compression:
      * <br/>
      * Implement a method to perform basic string compression using the counts of repeated characters.
@@ -362,6 +362,80 @@ public class ArraysAndStringsAlgorithms {
         }
 
         return compressed;
+    }
+
+    /**
+     * <b>1.7</b><br/>
+     * Rotate Matrix: Given an image represented by an NxN matrix, where each pixel in the image is 4
+     * bytes, write a method to rotate the image by 90 degrees. Can you do this in place?
+     * <br/>
+     * The matrix will be rotated in place and in a clockwise direction.
+     * <p>
+     * Matrix quadrant breakdown:
+     * <br/>
+     *  1 2
+     *  <br/>
+     *  4 3
+     * </p>
+     * <p>
+     *     Where for a N x N matrix:
+     *     <br/>
+     *     - Quadrant 1 is the top left most of the matrix. , containing [< n/2][ < n/2].
+     *     <br/>
+     *     - Quadrant 2 is the top right most of the matrix, containing [< n/2][ >= n/2].
+     *     <br/>
+     *     - Quadrant 3 is the top right most of the matrix, containing [< n/2][ >= n/2].
+     *     <br/>
+     *     - Quadrant 24 is the top right most of the matrix, containing [< n/2][ >= n/2].
+     * </p>
+     *
+     * @param n
+     * @param matrix
+     * @return
+     */
+    public void rotateMatrix(int n, final char[][] matrix) {
+        System.out.println("Before:");
+        System.out.println(printMatrix(n, matrix) + "\n");
+
+        int lastIndex = n - 1;
+
+        for (int i = 0; i < n/2; i++) {
+            for (int j = 0; j < (n % 2 == 0 ? n/2 : n/2 + 1); j++) {
+                char temp = matrix[j][lastIndex - i];
+                matrix[j][lastIndex - i] = matrix[i][j];
+                System.out.println("[" + j + "][" + (lastIndex - i) + "] = " + matrix[i][j]);
+
+                char temp2 = matrix[lastIndex - i][lastIndex - j];
+                matrix[lastIndex - i][lastIndex - j] = temp;
+                System.out.println("[" + (lastIndex - i) + "][" + (lastIndex - j) + "] = " + temp);
+
+                temp = matrix[lastIndex - j][i];
+                matrix[lastIndex - j][i] = temp2;
+                System.out.println("[" + (lastIndex - j) + "][" + (i) + "] = " + temp2);
+
+                matrix[i][j] = temp;
+                System.out.println("[" + i + "][" + j + "] = " + temp + "\n");
+            }
+
+        }
+        System.out.println("\nAfter:");
+        System.out.println(printMatrix(n, matrix));
+    }
+
+    public String printMatrix(int n, final char[][] matrix) {
+        String matrixString = "";
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (j == n -1) {
+                    matrixString = matrixString.concat(matrix[i][j] + "");
+                } else {
+                    matrixString = matrixString.concat(matrix[i][j] + ", ");
+                }
+            }
+            matrixString = matrixString.concat("\n");
+        }
+
+        return matrixString;
     }
 
 }

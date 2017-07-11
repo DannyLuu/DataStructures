@@ -7,9 +7,20 @@ public class Main {
     public static void main(String[] args) {
         ArraysAndStringsAlgorithms arraysAndStringsAlgorithms = new ArraysAndStringsAlgorithms();
 
-        System.out.println("Compressing \"aabcccccaaa\" -> " + arraysAndStringsAlgorithms.compressString("aabcccccaaa"));
-        System.out.println("Compressing \"abcd\" -> " + arraysAndStringsAlgorithms.compressString("abcd"));
-        System.out.println("Compressing \"a\" -> " + arraysAndStringsAlgorithms.compressString("a"));
-        System.out.println("Compressing \"aabb\" -> " + arraysAndStringsAlgorithms.compressString("aabb"));
+        char[][] matrix = new char[][] {
+            {'a', 'b', 'c', 'd'},
+            {'e', 'f', 'g', 'h'},
+            {'i', 'j', 'k', 'l'},
+            {'m', 'n', 'o', 'p'}
+        };
+
+        char[][] oddMatrix = new char[][] {
+                {'a','b','c'},
+                {'d','e','f'},
+                {'g','h','i'}
+        };
+
+        arraysAndStringsAlgorithms.rotateMatrix(3, oddMatrix);
+
     }
 }
