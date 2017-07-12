@@ -441,6 +441,7 @@ public class ArraysAndStringsAlgorithms {
     }
 
     /**
+     * <b>1.8</b><br/>
      * Zero Matrix: Write an algorithm such that if an element in an MxN matrix is 0,
      * its entire row and column are set to O.
      * @param matrix
