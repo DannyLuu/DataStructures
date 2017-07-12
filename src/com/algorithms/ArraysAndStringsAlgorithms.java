@@ -340,28 +340,27 @@ public class ArraysAndStringsAlgorithms {
      * @return
      */
     public String compressString(String input) {
-        String compressed = "";
-
+        StringBuffer compressed = new StringBuffer();
 
         if (input.length() > 0) {
             char c = input.charAt(0);
             int count = 1;
             for (int i = 1; i < input.length(); i++) {
                 if (input.charAt(i) != c) {
-                    compressed = compressed.concat(c + "" + count);
+                    compressed.append(c + "" + count);
                     c = input.charAt(i);
                     count = 0;
                 }
                 count++;
             }
-            compressed = compressed.concat(c + "" + count);
+            compressed.append(c + "" + count);
+
+            if (compressed.length() > input.length()) {
+                return input;
+            }
         }
 
-        if (input.length() <= compressed.length()) {
-            return input;
-        }
-
-        return compressed;
+        return compressed.toString();
     }
 
     /**
@@ -395,7 +394,7 @@ public class ArraysAndStringsAlgorithms {
      */
     public void rotateMatrix(int n, final char[][] matrix) {
         System.out.println("Before:");
-        System.out.println(printMatrix(n, matrix) + "\n");
+        System.out.println(printMatrix(matrix) + "\n");
 
         int lastIndex = n - 1;
 
@@ -419,12 +418,74 @@ public class ArraysAndStringsAlgorithms {
 
         }
         System.out.println("\nAfter:");
-        System.out.println(printMatrix(n, matrix));
+        System.out.println(printMatrix(matrix));
     }
 
-    public String printMatrix(int n, final char[][] matrix) {
+    public String printMatrix(final char[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
         String matrixString = "";
-        for (int i = 0; i < n; i++) {
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (j == n -1) {
+                    matrixString = matrixString.concat(matrix[i][j] + "");
+                } else {
+                    matrixString = matrixString.concat(matrix[i][j] + ", ");
+                }
+            }
+            matrixString = matrixString.concat("\n");
+        }
+
+        return matrixString;
+    }
+
+    /**
+     * Zero Matrix: Write an algorithm such that if an element in an MxN matrix is 0,
+     * its entire row and column are set to O.
+     * @param matrix
+     */
+    public void zeroMatrix(final int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        boolean[] rowContainsZero = new boolean[m];
+        boolean[] columnContainsZero = new boolean[n];
+
+        // Get all of the points where the element is 0.
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    rowContainsZero[i] = true;
+                    columnContainsZero[j] = true;
+                }
+            }
+        }
+
+        // Set the original matrix's entire rows and columns to 0 where the element is 0.
+        for (int i = 0; i < m; i++){
+            if (rowContainsZero[i]) {
+                for (int j = 0; j < n; j++) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        for (int j = 0; j < n; j++) {
+            if (columnContainsZero[j]) {
+                for (int i = 0; i < m; i++) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+
+    public String printMatrix(final int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        String matrixString = "";
+
+        for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (j == n -1) {
                     matrixString = matrixString.concat(matrix[i][j] + "");
