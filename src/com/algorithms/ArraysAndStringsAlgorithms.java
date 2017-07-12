@@ -139,7 +139,8 @@ public class ArraysAndStringsAlgorithms {
 
     /**
      * <b>1.4</b><br/>
-     * <b></b>Palindrome Permutation:</b> Given a string, write a function to check if it is a permutation of a palin- drome.
+     * <b></b>Palindrome Permutation:</b> Given a string, write a function to check if it is a permutation of a
+     * palin- drome.
      * A palindrome is a word or phrase that is the same forwards and backwards. A permutation is a rearrangement
      * of letters.The palindrome does not need to be limited to just dictionary words.
      * <p>
@@ -193,7 +194,8 @@ public class ArraysAndStringsAlgorithms {
                 Set<String> mirroredPermutationsWithWildcard = new HashSet<>();
                 for (String permutation : palindromePermutation) {
                     for (int i = 1; i < permutation.length() - 1; i++) {
-                        mirroredPermutationsWithWildcard.add(permutation.substring(0, i) + " " + permutation.substring(i, permutation.length()));
+                        mirroredPermutationsWithWildcard.add(permutation.substring(0, i) + " " + permutation
+                                .substring(i, permutation.length()));
                     }
                 }
 
@@ -285,7 +287,8 @@ public class ArraysAndStringsAlgorithms {
 
         if (first.equals(second)) {
             return true;
-        } else if ((first.length() > second.length() && first.length() - second.length() > 1) || (first.length() < second.length() && second.length() - first.length() > 1)) {
+        } else if ((first.length() > second.length() && first.length() - second.length() > 1) || (first.length() <
+                second.length() && second.length() - first.length() > 1)) {
             return false;
         }
 
@@ -372,20 +375,20 @@ public class ArraysAndStringsAlgorithms {
      * <p>
      * Matrix quadrant breakdown:
      * <br/>
-     *  1 2
-     *  <br/>
-     *  4 3
+     * 1 2
+     * <br/>
+     * 4 3
      * </p>
      * <p>
-     *     Where for a N x N matrix:
-     *     <br/>
-     *     - Quadrant 1 is the top left most of the matrix. , containing [< n/2][ < n/2].
-     *     <br/>
-     *     - Quadrant 2 is the top right most of the matrix, containing [< n/2][ >= n/2].
-     *     <br/>
-     *     - Quadrant 3 is the top right most of the matrix, containing [< n/2][ >= n/2].
-     *     <br/>
-     *     - Quadrant 24 is the top right most of the matrix, containing [< n/2][ >= n/2].
+     * Where for a N x N matrix:
+     * <br/>
+     * - Quadrant 1 is the top left most of the matrix. , containing [< n/2][ < n/2].
+     * <br/>
+     * - Quadrant 2 is the top right most of the matrix, containing [< n/2][ >= n/2].
+     * <br/>
+     * - Quadrant 3 is the top right most of the matrix, containing [< n/2][ >= n/2].
+     * <br/>
+     * - Quadrant 24 is the top right most of the matrix, containing [< n/2][ >= n/2].
      * </p>
      *
      * @param n
@@ -398,8 +401,8 @@ public class ArraysAndStringsAlgorithms {
 
         int lastIndex = n - 1;
 
-        for (int i = 0; i < n/2; i++) {
-            for (int j = 0; j < (n % 2 == 0 ? n/2 : n/2 + 1); j++) {
+        for (int i = 0; i < n / 2; i++) {
+            for (int j = 0; j < (n % 2 == 0 ? n / 2 : n / 2 + 1); j++) {
                 char temp = matrix[j][lastIndex - i];
                 matrix[j][lastIndex - i] = matrix[i][j];
                 System.out.println("[" + j + "][" + (lastIndex - i) + "] = " + matrix[i][j]);
@@ -428,7 +431,7 @@ public class ArraysAndStringsAlgorithms {
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (j == n -1) {
+                if (j == n - 1) {
                     matrixString = matrixString.concat(matrix[i][j] + "");
                 } else {
                     matrixString = matrixString.concat(matrix[i][j] + ", ");
@@ -444,6 +447,7 @@ public class ArraysAndStringsAlgorithms {
      * <b>1.8</b><br/>
      * Zero Matrix: Write an algorithm such that if an element in an MxN matrix is 0,
      * its entire row and column are set to O.
+     *
      * @param matrix
      */
     public void zeroMatrix(final int[][] matrix) {
@@ -464,7 +468,7 @@ public class ArraysAndStringsAlgorithms {
         }
 
         // Set the original matrix's entire rows and columns to 0 where the element is 0.
-        for (int i = 0; i < m; i++){
+        for (int i = 0; i < m; i++) {
             if (rowContainsZero[i]) {
                 for (int j = 0; j < n; j++) {
                     matrix[i][j] = 0;
@@ -488,7 +492,7 @@ public class ArraysAndStringsAlgorithms {
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (j == n -1) {
+                if (j == n - 1) {
                     matrixString = matrixString.concat(matrix[i][j] + "");
                 } else {
                     matrixString = matrixString.concat(matrix[i][j] + ", ");
@@ -500,4 +504,25 @@ public class ArraysAndStringsAlgorithms {
         return matrixString;
     }
 
+    /**
+     * <b>1.9</b><br/>
+     * String Rotation: Assume you have a method isSubstring which checks if one word is a substring of another.
+     * Given two strings, s1 and s2, write code to check if s2 is a rotation of s1 using only one call to
+     * isSubstring (e.g.,"waterbottle"is a rotation of"erbottlewat").
+     *
+     * @param s1
+     * @param s2
+     * @return
+     */
+    public boolean isRotation(String s1, String s2) {
+        if (s1.length() != s2.length()) {
+            return false;
+        }
+
+        return isSubstring(s1 + s1, s2);
+    }
+
+    public boolean isSubstring(String s1, String s2) {
+        return s1.contains(s2);
+    }
 }
