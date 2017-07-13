@@ -21,6 +21,14 @@ public class LinkedList<T> {
         return size;
     }
 
+    public Node getHead() {
+        return head;
+    }
+
+    public void setHead(Node head) {
+        this.head = head;
+    }
+
     /**
      * Add node at head.
      */
@@ -106,14 +114,14 @@ public class LinkedList<T> {
 
     @Override
     public String toString() {
-        String msg = "";
+        StringBuffer msg = new StringBuffer();
         Node curr = head;
         while (curr != null) {
             if (curr != null) {
-                msg += curr.getData().toString() + ", ";
+                msg.append(curr.getData().toString() + ", ");
                 curr = curr.getNext();
             }
         }
-        return msg;
+        return msg.toString();
     }
 }
