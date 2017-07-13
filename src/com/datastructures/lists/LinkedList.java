@@ -118,7 +118,7 @@ public class LinkedList<T> {
         Node curr = head;
         while (curr != null) {
             if (curr != null) {
-                msg.append(curr.getData().toString() + ", ");
+                msg.append(curr.getData().toString() + " -> ");
                 curr = curr.getNext();
             }
         }

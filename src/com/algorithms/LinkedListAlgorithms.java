@@ -66,4 +66,34 @@ public class LinkedListAlgorithms {
 
         linkedList.setHead(currNode);
     }
+
+    /**
+     * <b>2.3</b><br/>
+     * Delete Middle Node: Implement an algorithm to delete a node in the middle
+     * (i.e., any node but the first and last node, not necessarily the exact middle)
+     * of a singly linked list, given only access to that node.
+     * <br/>
+     * EXAMPLE
+     * Input: the node c from the linked list a -> b -> c -> d -> e -> f<br/>
+     * Result: nothing is returned, but the new linked list looks like a -> b-> d -> e-> f
+     */
+    public void deleteMiddleNode(LinkedList<String> linkedList) {
+        Node prev = null;
+        Node curr = linkedList.getHead();
+        Node next = curr.getNext().getNext();
+
+        while (next != null) {
+            prev = curr;
+            curr = curr.getNext();
+
+            if (next.getNext() != null) {
+                next = next.getNext().getNext();
+            } else {
+                next = next.getNext();
+            }
+        }
+
+        prev.setNext(curr.getNext());
+        curr.setNext(null);
+    }
 }
