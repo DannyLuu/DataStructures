@@ -145,16 +145,16 @@ public class LinkedListAlgorithms {
         int secondSum = getBackwardsLinkedListSum(secondList.getHead());
         int total = firstSum + secondSum;
 
-        LinkedList<Integer> sumLists = new LinkedList<>();
-        addSumBackwardsToLinkedList(total, sumLists);
+        LinkedList<Integer> sumList = new LinkedList<>();
+        addSumBackwardsToLinkedList(total, sumList);
 
-        return sumLists;
+        return sumList;
     }
 
     private int getBackwardsLinkedListSum(Node currNode) {
         int sum = 0;
         int factor = 1;
-        while (currNode != null)  {
+        while (currNode != null) {
             sum += (int) currNode.getData() * factor;
             currNode = currNode.getNext();
             factor *= 10;
@@ -171,5 +171,70 @@ public class LinkedListAlgorithms {
             value %= factor;
             factor /= 10;
         }
+    }
+
+    /**
+     * Suppose the digits are stored in forward order. Repeat the above problem.
+     * <br/>
+     * EXAMPLE
+     * Input: (6 -> 1 -> 7) + (2 -> 9 -> 5).    That is, 617 + 295.
+     * <br/>
+     * Output: 9 -> 1 -> 2. That is, 912.
+     *
+     * @param firstList
+     * @param secondList
+     * @return
+     */
+    public LinkedList<Integer> sumListsForwards(LinkedList<Integer> firstList, LinkedList<Integer> secondList) {
+        int firstSum = getForwardLinkedListSum(firstList.getHead());
+        int secondSum = getForwardLinkedListSum(secondList.getHead());
+        int total = firstSum + secondSum;
+
+        LinkedList<Integer> sumList = new LinkedList<Integer>();
+        addSumToListForwards(total, sumList);
+
+        return sumList;
+    }
+
+    private int getForwardLinkedListSum(Node currNode) {
+        int sum = 0;
+        int length = 0;
+
+        Node counterNode = currNode;
+        while (counterNode != null) {
+            length++;
+            counterNode = counterNode.getNext();
+        }
+
+        int factor = (int) Math.pow(10, length - 1);
+        while (currNode != null) {
+            sum += (int) currNode.getData() * factor;
+            factor /= 10;
+            currNode = currNode.getNext();
+        }
+
+        return sum;
+    }
+
+    private void addSumToListForwards(int value, final LinkedList<Integer> linkedList) {
+        Node head = null;
+        Node prevNode = null;
+
+        int factor = (int) Math.pow(10, (Integer.toString(value).length() - 1));
+        while (factor > 0) {
+            Node currNode = new Node(value / factor);
+            if (head == null) {
+                head = currNode;
+                prevNode = currNode;
+            } else {
+                prevNode.setNext(currNode);
+                prevNode = currNode;
+            }
+
+            value %= factor;
+            factor /= 10;
+        }
+
+        linkedList.setHead(head);
     }
 }

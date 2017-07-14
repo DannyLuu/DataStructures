@@ -8,7 +8,8 @@ public class Main {
 
     public static void main(String[] args) {
         Main program = new Main();
-        program.sumListsBackwards();
+        //program.sumListsBackwards();
+        program.sumListsForwards();
 
     }
 
@@ -24,5 +25,19 @@ public class Main {
         secondList.add(5);
 
         System.out.println(linkedListAlgorithms.sumListsBackwards(firstList, secondList).toString());
+    }
+
+    public void sumListsForwards() {
+        LinkedList<Integer> firstList = new LinkedList<>();
+        firstList.add(7);
+        firstList.add(1);
+        firstList.add(6);
+
+        LinkedList<Integer> secondList = new LinkedList<>();
+        secondList.add(5);
+        secondList.add(9);
+        secondList.add(2);
+
+        System.out.println(linkedListAlgorithms.sumListsForwards(firstList, secondList).toString());
     }
 }
