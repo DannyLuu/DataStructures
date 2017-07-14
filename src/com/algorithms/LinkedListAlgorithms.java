@@ -237,4 +237,39 @@ public class LinkedListAlgorithms {
 
         linkedList.setHead(head);
     }
+
+    /**
+     * <b>2.6</b><br/>
+     * Palindrome: Implement a function to check if a linked list is a palindrome.
+     *
+     * @param linkedList
+     * @return
+     */
+    public boolean isLinkedListAPalindrome(LinkedList<String> linkedList) {
+        StringBuffer stringBuffer = new StringBuffer();
+        Node currNode = linkedList.getHead();
+
+        while (currNode != null) {
+            stringBuffer.append(currNode.getData().toString());
+            currNode = currNode.getNext();
+        }
+
+        return isPalindrome(stringBuffer.toString());
+    }
+
+    private boolean isPalindrome(String word) {
+        boolean isPalindrome = true;
+
+        while (word.length() > 0) {
+            if (word.length() <= 1) {
+                return true;
+            } else if (word.charAt(0) == word.charAt(word.length() - 1)) {
+                word = word.substring(1, word.length() - 1);
+            } else {
+                return false;
+            }
+        }
+
+        return isPalindrome;
+    }
 }

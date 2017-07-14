@@ -9,7 +9,8 @@ public class Main {
     public static void main(String[] args) {
         Main program = new Main();
         //program.sumListsBackwards();
-        program.sumListsForwards();
+        //program.sumListsForwards();
+        program.checkIfElementsInLinkedListIsAPalindrome();
 
     }
 
@@ -39,5 +40,18 @@ public class Main {
         secondList.add(2);
 
         System.out.println(linkedListAlgorithms.sumListsForwards(firstList, secondList).toString());
+    }
+
+    public void checkIfElementsInLinkedListIsAPalindrome() {
+        LinkedList<String> linkedList = new LinkedList<>();
+        linkedList.add("t");
+        linkedList.add("a");
+        linkedList.add("c");
+        linkedList.add("o");
+        linkedList.add("c");
+        linkedList.add("a");
+        linkedList.add("t");
+
+        System.out.println(linkedListAlgorithms.isLinkedListAPalindrome(linkedList));
     }
 }
