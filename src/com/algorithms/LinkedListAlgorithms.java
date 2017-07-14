@@ -77,7 +77,7 @@ public class LinkedListAlgorithms {
      * Input: the node c from the linked list a -> b -> c -> d -> e -> f<br/>
      * Result: nothing is returned, but the new linked list looks like a -> b-> d -> e-> f
      */
-    public void deleteMiddleNode(LinkedList<String> linkedList) {
+    public void deleteMiddleNode(final LinkedList<String> linkedList) {
         Node prev = null;
         Node curr = linkedList.getHead();
         Node next = curr.getNext().getNext();
@@ -95,5 +95,81 @@ public class LinkedListAlgorithms {
 
         prev.setNext(curr.getNext());
         curr.setNext(null);
+    }
+
+    /**
+     * <b>2.4</b><br/>
+     * Partition: Write code to partition a linked list around a value x, such that all nodes less than
+     * x come before all nodes greater than or equal to x. lf x is contained within the list, the values
+     * of x only need to be after the elements less than x (see below).The partition element x can appear
+     * anywhere in the "right partition"; it does not need to appear between the left and right partitions.
+     * <br/>
+     * EXAMPLE
+     * <br/>
+     * Input: 3 -> 5 -> 8 -> 5 ->10 -> 2 -> 1 [partition=5]
+     * <br/>
+     * Output: 3 -> 1 -> 2 -> 10 -> 5 -> 5 -> 8
+     *
+     * @param linkedList
+     */
+    public void partition(LinkedList<Integer> linkedList) {
+
+    }
+
+    /**
+     * <b>2.5</b><br/>
+     * Sum Lists: You have two numbers represented by a linked list, where each node contains a single digit. The
+     * digits are stored in reverse order, such that the 1's digit is at the head of the list. Write a function that
+     * adds the two numbers and returns the sum as a linked list.
+     * <br/>
+     * EXAMPLE
+     * <br/>
+     * Input: (7 -> 1 -> 6) + (5 -> 9 -> 2).    That is, 617 + 295.
+     * <br/>
+     * Output: 2 -> 1 -> 9. That is, 912.
+     * <br/>
+     * <br/>
+     * FOLLOW UP
+     * <br/>
+     * Suppose the digits are stored in forward order. Repeat the above problem. EXAMPLE
+     * Input: (6 -> 1 -> 7) + (2 -> 9 -> 5).    That is, 617 + 295.
+     * <br/>
+     * Output: 9 -> 1 -> 2. That is, 912.
+     *
+     * @param firstList
+     * @param secondList
+     * @return
+     */
+    public LinkedList<Integer> sumListsBackwards(LinkedList<Integer> firstList, LinkedList<Integer> secondList) {
+        int firstSum = getBackwardsLinkedListSum(firstList.getHead());
+        int secondSum = getBackwardsLinkedListSum(secondList.getHead());
+        int total = firstSum + secondSum;
+
+        LinkedList<Integer> sumLists = new LinkedList<>();
+        addSumBackwardsToLinkedList(total, sumLists);
+
+        return sumLists;
+    }
+
+    private int getBackwardsLinkedListSum(Node currNode) {
+        int sum = 0;
+        int factor = 1;
+        while (currNode != null)  {
+            sum += (int) currNode.getData() * factor;
+            currNode = currNode.getNext();
+            factor *= 10;
+        }
+
+        return sum;
+    }
+
+    private void addSumBackwardsToLinkedList(int value, final LinkedList<Integer> linkedList) {
+        int factor = (int) Math.pow(10, (Integer.toString(value).length() - 1));
+
+        while (factor > 0) {
+            linkedList.add(value / factor);
+            value %= factor;
+            factor /= 10;
+        }
     }
 }
