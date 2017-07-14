@@ -14,8 +14,8 @@ public class Main {
         //program.sumListsBackwards();
         //program.sumListsForwards();
         //program.checkIfElementsInLinkedListIsAPalindrome();
-
-        program.findLinkedListIntersection();
+        //program.findLinkedListIntersection();
+        program.findNodeAtLoopOfLinkedList();
 
     }
 
@@ -61,6 +61,9 @@ public class Main {
     }
 
     public void findLinkedListIntersection() {
+        LinkedList<String> firstList = new LinkedList<>();
+        LinkedList<String> secondList = new LinkedList<>();
+
         // Generating nodes for first list.
         Node<String> node1 = new Node<>("a");
         Node<String> node2 = new Node<>("b");
@@ -96,14 +99,34 @@ public class Main {
         node13.setNext(node14);
         node14.setNext(node15);
 
-        LinkedList<String> firstList = new LinkedList<>();
+
         firstList.setHead(node1);
-        LinkedList<String> secondList = new LinkedList<>();
         secondList.setHead(node7);
 
         Node intersectingNode = linkedListAlgorithms.findIntersection(firstList, secondList);
 
         assertEquals(node8, intersectingNode);
         System.out.println(node8 == intersectingNode);
+    }
+
+    public void findNodeAtLoopOfLinkedList() {
+        LinkedList<String> linkedList = new LinkedList<>();
+        Node<String> node1 = new Node<>("A");
+        Node<String> node2 = new Node<>("B");
+        Node<String> node3 = new Node<>("C");
+        Node<String> node4 = new Node<>("D");
+        Node<String> node5 = new Node<>("E");
+
+        node1.setNext(node2);
+        node2.setNext(node3);
+        node3.setNext(node4);
+        node4.setNext(node5);
+        node5.setNext(node3);
+
+        linkedList.setHead(node1);
+
+        Node delinquentNode = linkedListAlgorithms.findNodeAtLoop(linkedList);
+        System.out.println(delinquentNode.getData().toString());
+        System.out.println("is node3 == delinquentNode? " + (node3 == delinquentNode));
     }
 }

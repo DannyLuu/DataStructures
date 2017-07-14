@@ -277,7 +277,7 @@ public class LinkedListAlgorithms {
     }
 
     /**
-     * <b>2.6</b><br/>
+     * <b>2.7</b><br/>
      * Intersection: Given two (singly) linked lists, determine if the two lists intersect.
      * Return the intersecting node. Note that the intersection is defined based on reference,
      * not value. That is, if the kth node of the first linked list is the exact same node
@@ -306,5 +306,40 @@ public class LinkedListAlgorithms {
         }
 
         return null;
+    }
+
+    /**
+     * <b>2.8</b><br/>
+     * Loop Detection: Given a circular linked list, implement an algorithm that returns the node at the beginning of
+     * the loop.
+     * <br/>
+     * DEFINITION
+     * <br/>
+     * Circular linked list: A (corrupt) linked list in which a node's next pointer points to an earlier node, so as
+     * to make a
+     * loop in the linked list.
+     * <br/>
+     * <br/>
+     * EXAMPLE
+     * <br/>
+     * Input: A -> B -> C -> D -> E -> C [The same C as earlier]
+     * <br/>
+     * Output: C
+     *
+     * @param linkedList
+     * @return
+     */
+    public Node<String> findNodeAtLoop(LinkedList<String> circularLinkedList) {
+        // Assumption: Since the linked list given is corrupted, we can do this in O(n) time with no extra memory.
+        Node currNode = circularLinkedList.getHead();
+        Node prevNode = null;
+
+        while (currNode != null) {
+            prevNode = currNode;
+            currNode = currNode.getNext();
+            prevNode.setNext(null);
+        }
+
+        return prevNode;
     }
 }
