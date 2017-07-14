@@ -3,6 +3,9 @@ package com.algorithms;
 import com.datastructures.lists.LinkedList;
 import com.datastructures.lists.Node;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by Hisoka on 2017-07-12.
  */
@@ -245,7 +248,7 @@ public class LinkedListAlgorithms {
      * @param linkedList
      * @return
      */
-    public boolean isLinkedListAPalindrome(LinkedList<String> linkedList) {
+    public boolean isPalindrome(LinkedList<String> linkedList) {
         StringBuffer stringBuffer = new StringBuffer();
         Node currNode = linkedList.getHead();
 
@@ -271,5 +274,37 @@ public class LinkedListAlgorithms {
         }
 
         return isPalindrome;
+    }
+
+    /**
+     * <b>2.6</b><br/>
+     * Intersection: Given two (singly) linked lists, determine if the two lists intersect.
+     * Return the intersecting node. Note that the intersection is defined based on reference,
+     * not value. That is, if the kth node of the first linked list is the exact same node
+     * (by reference) as the jth node of the second linked list, then they are intersecting.
+     *
+     * @param firstList
+     * @param secondList
+     * @return
+     */
+    public Node<String> findIntersection(LinkedList<String> firstList, LinkedList<String> secondList) {
+        Set<Node> nodes = new HashSet<>();
+        Node intersectingNode = null;
+
+        Node currNode = firstList.getHead();
+        while (currNode != null) {
+            nodes.add(currNode);
+            currNode = currNode.getNext();
+        }
+
+        currNode = secondList.getHead();
+        while (currNode != null) {
+            if (nodes.contains(currNode)) {
+                return currNode;
+            }
+            currNode = currNode.getNext();
+        }
+
+        return null;
     }
 }
