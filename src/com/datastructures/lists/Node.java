@@ -54,7 +54,7 @@ public class Node<T> {
 
         Node node = (Node) obj;
 
-        return ((Node) obj).data == data && ((Node) obj).next == next;
+        return Objects.equals(data, ((Node) obj).data) && Objects.equals(next, ((Node) obj).next);
     }
 
     @Override
