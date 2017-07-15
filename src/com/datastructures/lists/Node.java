@@ -1,5 +1,7 @@
 package com.datastructures.lists;
 
+import java.util.Objects;
+
 public class Node<T> {
     private T data;
     private Node<T> next;
@@ -40,4 +42,23 @@ public class Node<T> {
         return data.toString();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof  Node)) {
+            return false;
+        }
+
+        Node node = (Node) obj;
+
+        return ((Node) obj).data == data && ((Node) obj).next == next;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(data, next);
+    }
 }
