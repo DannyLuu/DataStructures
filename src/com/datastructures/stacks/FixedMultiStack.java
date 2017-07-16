@@ -4,7 +4,7 @@ import java.util.EmptyStackException;
 
 /**
  * <b>Interview Question - Stacks and Queues</b><br/>
- * <b>2.1</b>
+ * <b>3.1</b>
  * Three in One: Describe how you could use a single array to implement three stacks.
  * <p>
  * This implementation of three stacks using a single array will have a fixed division for each stack.
