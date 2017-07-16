@@ -23,7 +23,7 @@ public class Stack<T> {
      * @return
      */
     public T pop() {
-        if (top == null) {
+        if (isEmpty()) {
             throw new EmptyStackException();
         }
 
