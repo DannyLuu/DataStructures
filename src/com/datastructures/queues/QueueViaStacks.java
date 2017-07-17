@@ -21,13 +21,13 @@ public class QueueViaStacks<T> {
             orderedStack.push(value);
         } else {
             Stack<T> reversedStack = new Stack<>();
-            while(!orderedStack.isEmpty()) {
+            while (!orderedStack.isEmpty()) {
                 reversedStack.push(orderedStack.pop());
             }
 
             reversedStack.push(value);
 
-            while(!reversedStack.isEmpty()) {
+            while (!reversedStack.isEmpty()) {
                 orderedStack.push(reversedStack.pop());
             }
         }
