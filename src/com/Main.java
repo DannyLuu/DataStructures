@@ -1,29 +1,27 @@
 package com;
 
 import com.algorithms.LinkedListAlgorithms;
-import com.datastructures.stacks.SetOfStacks;
+import com.datastructures.queues.QueueViaStacks;
 
 public class Main {
     private static LinkedListAlgorithms linkedListAlgorithms = new LinkedListAlgorithms();
 
     public static void main(String[] args) {
-        SetOfStacks setOfStacks = new SetOfStacks(2);
+        QueueViaStacks<String> queueViaStacks = new QueueViaStacks();
 
-        System.out.println("is SetOfStacks empty? " + setOfStacks.isEmpty());
-        setOfStacks.push(10);
-        setOfStacks.push(9);
-        setOfStacks.push(8);
-        setOfStacks.push(7);
-        setOfStacks.push(6);
-        setOfStacks.push(5);
+        System.out.println("Is queueViaStacks empty? " + queueViaStacks.isEmpty());
+        System.out.println("Pushing hello");
+        queueViaStacks.push("hello");
+        System.out.println("Is queueViaStacks empty? " + queueViaStacks.isEmpty());
+        queueViaStacks.push("yolo");
+        queueViaStacks.push("swagg");
+        queueViaStacks.push("Hard lyfe");
+        queueViaStacks.push("black and yellow");
 
-        System.out.println("is SetOfStacks empty? " + setOfStacks.isEmpty());
-        System.out.println("Popping stack 1: " + setOfStacks.popAt(1));
-        System.out.println("Popping stack 1: " + setOfStacks.popAt(1));
-        System.out.println("Popping stack 1: " + setOfStacks.popAt(1));
-        System.out.println("Popping stack 1: " + setOfStacks.popAt(1));
-        System.out.println("Popping stack: " + setOfStacks.pop());
-        System.out.println("Popping stack: " + setOfStacks.pop());
-        System.out.println("is SetOfStacks empty? " + setOfStacks.isEmpty());
+        while(!queueViaStacks.isEmpty()) {
+            System.out.println("Removing... " + queueViaStacks.remove());
+        }
+
+
     }
 }
