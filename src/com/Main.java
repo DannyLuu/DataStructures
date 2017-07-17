@@ -1,33 +1,29 @@
 package com;
 
 import com.algorithms.LinkedListAlgorithms;
-import com.datastructures.stacks.MinStack;
+import com.datastructures.stacks.SetOfStacks;
 
 public class Main {
     private static LinkedListAlgorithms linkedListAlgorithms = new LinkedListAlgorithms();
 
     public static void main(String[] args) {
-        MinStack minStack = new MinStack();
+        SetOfStacks setOfStacks = new SetOfStacks(2);
 
-        System.out.println("Is min stack empty? " + minStack.isEmpty());
+        System.out.println("is SetOfStacks empty? " + setOfStacks.isEmpty());
+        setOfStacks.push(10);
+        setOfStacks.push(9);
+        setOfStacks.push(8);
+        setOfStacks.push(7);
+        setOfStacks.push(6);
+        setOfStacks.push(5);
 
-        minStack.push(10);
-        System.out.println("Peek: " + minStack.peek());
-        System.out.println("Min value = " + minStack.getMin());
-
-        minStack.push(11);
-        System.out.println("Peek: " + minStack.peek() + "\tMin value = " + minStack.getMin());
-
-        minStack.push(9);
-        System.out.println("Peek: " + minStack.peek() + "\tMin value = " + minStack.getMin());
-
-        minStack.push(12);
-        System.out.println("Peek: " + minStack.peek() + "\tMin value = " + minStack.getMin());
-
-        System.out.println("pop: " + minStack.pop());
-        System.out.println("Peek: " + minStack.peek() + "\tMin value = " + minStack.getMin());
-
-        System.out.println("pop: " + minStack.pop());
-        System.out.println("Peek: " + minStack.peek() + "\tMin value = " + minStack.getMin());
+        System.out.println("is SetOfStacks empty? " + setOfStacks.isEmpty());
+        System.out.println("Popping stack 1: " + setOfStacks.popAt(1));
+        System.out.println("Popping stack 1: " + setOfStacks.popAt(1));
+        System.out.println("Popping stack 1: " + setOfStacks.popAt(1));
+        System.out.println("Popping stack 1: " + setOfStacks.popAt(1));
+        System.out.println("Popping stack: " + setOfStacks.pop());
+        System.out.println("Popping stack: " + setOfStacks.pop());
+        System.out.println("is SetOfStacks empty? " + setOfStacks.isEmpty());
     }
 }
