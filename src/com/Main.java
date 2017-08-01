@@ -1,33 +1,40 @@
 package com;
 
 import com.algorithms.LinkedListAlgorithms;
-import com.datastructures.stacks.SortedStack;
+import com.datastructures.queues.AnimalShelter;
 
 public class Main {
     private static LinkedListAlgorithms linkedListAlgorithms = new LinkedListAlgorithms();
 
     public static void main(String[] args) {
-        SortedStack sortedStack = new SortedStack();
+        AnimalShelter animalShelter = generateAnimalShelter();
 
-        System.out.println("Is sorted stack empty? " +  sortedStack.isEmpty());
+        System.out.println("Adopt the first pet: " + animalShelter.dequeueAny().getAnimalName());
+        System.out.println("Adopt the first cat: " + animalShelter.dequeueCat().getAnimalName());
+        System.out.println("Adopt the first dog: " + animalShelter.dequeueDog().getAnimalName());
+        System.out.println("Adopt the first cat: " + animalShelter.dequeueCat().getAnimalName());
+        System.out.println("Adopt the first pet: " + animalShelter.dequeueAny().getAnimalName());
+        System.out.println("Adopt the first cat: " + animalShelter.dequeueCat().getAnimalName());
+    }
 
-        sortedStack.push(10);
-        System.out.println(sortedStack.peek());
-        sortedStack.push(12);
-        System.out.println(sortedStack.peek());
-        sortedStack.push(13);
-        System.out.println(sortedStack.peek());
-        sortedStack.push(14);
-        System.out.println(sortedStack.peek());
-        sortedStack.push(2);
-        System.out.println(sortedStack.peek());
-        sortedStack.push(1);
-        System.out.println(sortedStack.peek());
+    public static  AnimalShelter generateAnimalShelter() {
+        AnimalShelter animalShelter = new AnimalShelter();
 
-        System.out.println();
+        animalShelter.enqueue("Bailey", AnimalShelter.PetType.DOG);
+        animalShelter.enqueue("Max", AnimalShelter.PetType.DOG);
+        animalShelter.enqueue("Bella", AnimalShelter.PetType.DOG);
+        animalShelter.enqueue("Mason", AnimalShelter.PetType.DOG);
+        animalShelter.enqueue("Buddy", AnimalShelter.PetType.DOG);
+        animalShelter.enqueue("Drake", AnimalShelter.PetType.DOG);
+        animalShelter.enqueue("Tiger", AnimalShelter.PetType.CAT);
+        animalShelter.enqueue("Smokey", AnimalShelter.PetType.CAT);
+        animalShelter.enqueue("Suki", AnimalShelter.PetType.CAT);
+        animalShelter.enqueue("Kitty", AnimalShelter.PetType.CAT);
+        animalShelter.enqueue("Lilly", AnimalShelter.PetType.DOG);
+        animalShelter.enqueue("Grant", AnimalShelter.PetType.DOG);
+        animalShelter.enqueue("Judy", AnimalShelter.PetType.CAT);
+        animalShelter.enqueue("Thida", AnimalShelter.PetType.CAT);
 
-        while (!sortedStack.isEmpty()) {
-            System.out.println("Popping: " + sortedStack.pop());
-        }
+        return animalShelter;
     }
 }
