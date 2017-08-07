@@ -1,40 +1,46 @@
 package com;
 
-import com.algorithms.LinkedListAlgorithms;
-import com.datastructures.queues.AnimalShelter;
+import com.datastructures.trees.BinarySearchTree;
+import com.datastructures.trees.BinaryTreeTraversal;
 
 public class Main {
-    private static LinkedListAlgorithms linkedListAlgorithms = new LinkedListAlgorithms();
 
     public static void main(String[] args) {
-        AnimalShelter animalShelter = generateAnimalShelter();
+        BinaryTreeTraversal bstTraversal = new BinaryTreeTraversal();
+        BinarySearchTree bst = generateBST();
 
-        System.out.println("Adopt the first pet: " + animalShelter.dequeueAny().getAnimalName());
-        System.out.println("Adopt the first cat: " + animalShelter.dequeueCat().getAnimalName());
-        System.out.println("Adopt the first dog: " + animalShelter.dequeueDog().getAnimalName());
-        System.out.println("Adopt the first cat: " + animalShelter.dequeueCat().getAnimalName());
-        System.out.println("Adopt the first pet: " + animalShelter.dequeueAny().getAnimalName());
-        System.out.println("Adopt the first cat: " + animalShelter.dequeueCat().getAnimalName());
+
+        System.out.println("In Order Traversal...");
+        bstTraversal.inOrderTraversal(bst.getRoot());
+
+        System.out.println("\nPre Order Traversal...");
+        bstTraversal.preOrderTraversal(bst.getRoot());
+
+        System.out.println("\nPost Order Traversal...");
+        bstTraversal.postOrderTraversal(bst.getRoot());
+
     }
 
-    public static  AnimalShelter generateAnimalShelter() {
-        AnimalShelter animalShelter = new AnimalShelter();
+    public static BinarySearchTree generateBST() {
+        BinarySearchTree bst = new BinarySearchTree();
 
-        animalShelter.enqueue("Bailey", AnimalShelter.PetType.DOG);
-        animalShelter.enqueue("Max", AnimalShelter.PetType.DOG);
-        animalShelter.enqueue("Bella", AnimalShelter.PetType.DOG);
-        animalShelter.enqueue("Mason", AnimalShelter.PetType.DOG);
-        animalShelter.enqueue("Buddy", AnimalShelter.PetType.DOG);
-        animalShelter.enqueue("Drake", AnimalShelter.PetType.DOG);
-        animalShelter.enqueue("Tiger", AnimalShelter.PetType.CAT);
-        animalShelter.enqueue("Smokey", AnimalShelter.PetType.CAT);
-        animalShelter.enqueue("Suki", AnimalShelter.PetType.CAT);
-        animalShelter.enqueue("Kitty", AnimalShelter.PetType.CAT);
-        animalShelter.enqueue("Lilly", AnimalShelter.PetType.DOG);
-        animalShelter.enqueue("Grant", AnimalShelter.PetType.DOG);
-        animalShelter.enqueue("Judy", AnimalShelter.PetType.CAT);
-        animalShelter.enqueue("Thida", AnimalShelter.PetType.CAT);
+        bst.insert(25);
+        bst.insert(15);
+        bst.insert(50);
+        bst.insert(10);
+        bst.insert(22);
+        bst.insert(35);
+        bst.insert(70);
+        bst.insert(4);
+        bst.insert(12);
+        bst.insert(18);
+        bst.insert(24);
+        bst.insert(31);
+        bst.insert(44);
+        bst.insert(66);
+        bst.insert(90);
 
-        return animalShelter;
+        return bst;
     }
+
 }
