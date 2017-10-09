@@ -1,7 +1,5 @@
 package com.datastructures.trees;
 
-import com.datastructures.trees.BinarySearchTree.Node;
-
 /**
  * Tree Traversals
  * <p>
